@@ -58,7 +58,7 @@
     <properties>
         <componentName>bandeaugra</componentName>
         <jiraProjectName>BANDEAUGRA</jiraProjectName>
-        <jiraComponentId></jiraComponentId>
+        <jiraComponentId>13950</jiraComponentId>
     </properties>
     <scm>
         <connection>scm:git:https://github.com/lutece-secteur-public/gra-plugin-bandeau.git</connection>
