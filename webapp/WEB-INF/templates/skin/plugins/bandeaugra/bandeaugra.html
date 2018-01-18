@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<base href="${base_url}"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" >
+<meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta http-equiv="Content-Language" content="fr"/>
+<meta name="author" content=""/>
+<meta name="copyright" content=""/>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="generator" content="Lutece"/>
+<!-- Set the viewport width to device width for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<script>
+
+  <#if back_url??>
+    window.opener.location.href='${back_url}'
+  <#else>
+    window.opener.location.href = window.opener.location.href;
+  </#if>
+</script>
+
+<!-- Le javascript ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/tools.js"></script>
+</body>
+</html>

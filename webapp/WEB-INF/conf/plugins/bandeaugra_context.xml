@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
+
+    <bean id="bandeaugra.bannerInformationsRest" class="fr.paris.lutece.plugins.bandeaugra.rs.BannerInformationsRest" />
+   	<bean id="bandeaugra.bannerInformationDataClient" class="fr.paris.lutece.plugins.bandeaugra.service.BannerInformationDataClient">
+        <property name="name" value="bannerInfoDataClient" />
+        <property name="dataServerUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
+        <property name="tokenMethod" value="HEADER"/>
+        <property name="scope">
+            <set value-type="java.lang.String">
+                <value>openid</value>
+                <value>profile</value>
+                <value>email</value>
+                <value>address</value>
+                <value>phone</value>
+            </set>
+        </property>
+    </bean>
+
+</beans>
