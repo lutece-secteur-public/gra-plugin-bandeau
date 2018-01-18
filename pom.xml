@@ -60,4 +60,9 @@
         <jiraProjectName>BANDEAUGRA</jiraProjectName>
         <jiraComponentId></jiraComponentId>
     </properties>
+    <scm>
+        <connection>scm:git:https://github.com/lutece-secteur-public/gra-plugin-bandeau.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-secteur-public/gra-plugin-bandeau.git</developerConnection>
+        <url>https://github.com/lutece-secteur-public/gra-plugin-bandeau.git</url>
+    </scm>
 </project>
