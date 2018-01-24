@@ -19,5 +19,12 @@
             </set>
         </property>
     </bean>
+     <bean id="bandeaugra.hashService" class="fr.paris.lutece.util.signrequest.security.Sha1HashService" />
+     <bean id="bandeaugra.requestAuthenticator" class="fr.paris.lutece.util.signrequest.HeaderHashAuthenticator" >
+        <property name="hashService" ref="bandeaugra.hashService" />
+          <property name="privateKey">
+            <value>change me</value>
+        </property>
+    </bean>
 
 </beans>

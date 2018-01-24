@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.bandeaugra.rs;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.function.Function;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,11 +48,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.sun.jersey.api.Responses;
 
 import fr.paris.lutece.plugins.bandeaugra.business.BannerInformations;
+import fr.paris.lutece.plugins.bandeaugra.service.RemoteSiteBandeauClientService;
 import fr.paris.lutece.plugins.rest.service.RestConstants;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
@@ -211,5 +214,177 @@ public class BannerInformationsRest
        
     }
     
+    
+    /**
+     * Get User Informations
+     * 
+     * @param nVersion
+     *            the Api version
+     * @param request
+     *            the http servlet request
+     * @param response
+     *            the http servlet response
+     * @return
+     */
+    @GET
+    @Path( Constants.PATH_MYAPPS )
+    @Produces( MediaType.APPLICATION_JSON )
+    public Response getMyApps( @PathParam( Constants.API_VERSION ) Integer nVersion, @Context HttpServletRequest request,
+            @Context HttpServletResponse response )
+    {
+        switch( nVersion )
+        {
+            case VERSION_1:
+                return getMyAppsV1( request, response );
 
+            default:
+                break;
+        }
+
+        throw new WebApplicationException( Responses.NOT_FOUND );
+    }
+
+  
+    /**
+     *  Get User Informations V1
+     * @param request the request 
+     * @param response the http servlet response
+     * @return user informations
+     */
+    private Response getMyAppsV1( HttpServletRequest request, HttpServletResponse response )
+    {
+
+        return callBandeauSite( request, response, x -> RemoteSiteBandeauClientService.getInstance( ).getMyApps( x.getName( )));
+
+    }
+    
+    /**
+     * Get User Informations
+     * 
+     * @param nVersion
+     *            the Api version
+     * @param request
+     *            the http servlet request
+     * @param response
+     *            the http servlet response
+     * @return
+     */
+    @GET
+    @Path( Constants.PATH_NOTIFICATIONS )
+    @Produces( MediaType.APPLICATION_JSON )
+    public Response getNotifications( @PathParam( Constants.API_VERSION ) Integer nVersion, @Context HttpServletRequest request,
+            @Context HttpServletResponse response )
+    {
+        switch( nVersion )
+        {
+            case VERSION_1:
+                return getNotificationsV1( request, response );
+
+            default:
+                break;
+        }
+
+        throw new WebApplicationException( Responses.NOT_FOUND );
+    }
+
+  
+    /**
+     *  Get User Informations V1
+     * @param request the request 
+     * @param response the http servlet response
+     * @return user informations
+     */
+    private Response getNotificationsV1( HttpServletRequest request, HttpServletResponse response )
+    {
+
+        return callBandeauSite( request, response, x -> RemoteSiteBandeauClientService.getInstance( ).getNotifications( x.getName( )));
+
+    }
+    
+    
+    
+    
+    
+    /**
+     * Get User Informations
+     * 
+     * @param nVersion
+     *            the Api version
+     * @param request
+     *            the http servlet request
+     * @param response
+     *            the http servlet response
+     * @return
+     */
+    @GET
+    @Path( Constants.PATH_MY_FAVORITES )
+    @Produces( MediaType.APPLICATION_JSON )
+    public Response getMyFavorites( @PathParam( Constants.API_VERSION ) Integer nVersion, @Context HttpServletRequest request,
+            @Context HttpServletResponse response )
+    {
+        switch( nVersion )
+        {
+            case VERSION_1:
+                return getMyFavoritesV1( request, response );
+
+            default:
+                break;
+        }
+
+        throw new WebApplicationException( Responses.NOT_FOUND );
+    }
+
+  
+    /**
+     *  Get User Informations V1
+     * @param request the request 
+     * @param response the http servlet response
+     * @return user informations
+     */
+    private Response getMyFavoritesV1( HttpServletRequest request, HttpServletResponse response )
+    {
+
+        return callBandeauSite( request, response, x -> RemoteSiteBandeauClientService.getInstance( ).getMyFavorites( x.getName( )));
+
+    }
+    
+    
+    
+    
+    
+    /**
+     *  Get User Informations V1
+     * @param request the request 
+     * @param response the http servlet response
+     * @return user informations
+     */
+    private Response callBandeauSite( HttpServletRequest request, HttpServletResponse response ,Function<LuteceUser,String> functGetBandeauResponse )
+    {
+
+        LuteceUser user = SecurityService.getInstance( ).getRegisteredUser( request );
+
+        String strHeaderOrigin = request.getHeader( Constants.HEADER_ORIGIN );
+        String strAccessControlAllowOrigin = strHeaderOrigin;
+        if ( user != null )
+        {
+
+            String strBandeauSiteResponse=functGetBandeauResponse.apply( user);
+            
+            if(!StringUtils.isEmpty(strBandeauSiteResponse))
+            {
+                return Response.status( Response.Status.OK ).entity(strBandeauSiteResponse )
+                    .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
+                    .header( "Access-Control-Allow-Credentials", "true" ).build( );
+            }     
+           }
+    
+
+        return Response.status( Response.Status.UNAUTHORIZED )
+                .entity( JsonUtil.buildJsonResponse( new ErrorJsonResponse( Constants.ERROR_USER_NOT_AUTHENTICATED, Constants.ERROR_USER_NOT_AUTHENTICATED ) ) )
+                .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
+                .header( "Access-Control-Allow-Credentials", "true" ).build( );
+
+    }
+    
+    
 }

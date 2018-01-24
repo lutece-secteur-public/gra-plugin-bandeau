@@ -45,6 +45,12 @@ public final class Constants
     
     public static final String PATH_BANNER_API = "bandeaugra/api";
     public static final String PATH_USER_INFORMATIONS = "/{" + Constants.API_VERSION + "}/userinformations";
+    public static final String PATH_MYAPPS = "/{" + Constants.API_VERSION + "}/myapps";
+    public static final String PATH_NOTIFICATIONS = "/{" + Constants.API_VERSION + "}/notifications";
+    public static final String PATH_MY_FAVORITES = "/{" + Constants.API_VERSION + "}/myfavorites";
+    
+    
+    
     public static final String PATH_IS_USER_AUTHENTICATED = "/{" + Constants.API_VERSION + "}/isuserauthenticated";
     
     public static final String ID = "id";
