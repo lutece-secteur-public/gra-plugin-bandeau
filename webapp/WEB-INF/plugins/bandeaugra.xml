@@ -27,7 +27,7 @@
     <page-include-services>
          <page-include-service>
             	<page-include-service-id>bandeaugra_include</page-include-service-id>
-            	<page-include-service-class>fr.paris.lutece.plugins.bandeaugra.web.includes.HeaderInclude</page-include-service-class>
+            	<page-include-service-class>fr.paris.lutece.plugins.bandeaugra.web.includes.BandeaugraInclude</page-include-service-class>
         </page-include-service> 
     </page-include-services>
 
