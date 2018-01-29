@@ -127,7 +127,14 @@ public class BannerInformationsRest
 
             try
             {
-                String strUrl = AppPathService.getBaseUrl( request ) + "/servlet/plugins/oauth2/callback?data_client=bannerInfoDataClient";
+                
+                String strBaseUrl=AppPathService.getBaseUrl( request );
+                if(strBaseUrl.endsWith( "/" ))
+                {
+                    strBaseUrl=strBaseUrl.substring( 0,strBaseUrl.length( )-1);
+                    
+                }
+                String strUrl = strBaseUrl+ "/servlet/plugins/oauth2/callback?data_client=bannerInfoDataClient";
                 URI urlRedirect = null;
                 urlRedirect = new URI( strUrl );
                 return Response.seeOther( urlRedirect ).header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
