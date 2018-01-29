@@ -1,0 +1,15 @@
+<script>
+$(function() {
+    
+    <#if is_user_authenticated>
+		loadBanner('',true);
+	<#else>
+		 loadBanner();
+	</#if>   
+ $('[data-toggle="tooltip"]').tooltip()
+});
+
+
+
+</script>
+<script src="${url_bandeau}/assets/js/monbandeau.js"></script>
