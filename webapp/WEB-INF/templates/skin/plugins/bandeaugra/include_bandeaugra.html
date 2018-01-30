@@ -2,7 +2,7 @@
 <script>
 $(function() {
     
-    <#if is_user_authenticated>
+    <#if !is_user_authenticated>
 		loadBanner('',true);
 	<#else>
 		 loadBanner();
