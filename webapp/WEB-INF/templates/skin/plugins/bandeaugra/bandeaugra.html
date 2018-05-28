@@ -19,7 +19,7 @@
 <script>
 
   <#if back_url??>
-    window.opener.location.href='${back_url}'
+    window.opener.location.href='${back_url?js_string}'
   <#else>
     window.opener.location.href = window.opener.location.href;
   </#if>
