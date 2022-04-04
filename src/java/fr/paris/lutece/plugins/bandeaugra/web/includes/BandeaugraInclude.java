@@ -44,6 +44,7 @@ import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.service.security.UserNotSignedException;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.html.HtmlTemplate;
 
@@ -86,7 +87,7 @@ public class BandeaugraInclude implements PageInclude
             }
             catch( UserNotSignedException e )
             {
-
+            	AppLogService.error( e.getMessage( ), e );
             }
 
             mapInclude.put( MARK_IS_USER_AUTHENTICATED, user != null );

@@ -48,8 +48,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.lang3.StringUtils;
 
 import com.sun.jersey.api.Responses;
 
@@ -58,6 +57,7 @@ import fr.paris.lutece.plugins.bandeaugra.service.RemoteSiteBandeauClientService
 import fr.paris.lutece.plugins.rest.service.RestConstants;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.util.json.ErrorJsonResponse;
 import fr.paris.lutece.util.json.JsonResponse;
@@ -70,8 +70,7 @@ import fr.paris.lutece.util.json.JsonUtil;
 public class BannerInformationsRest
 {
     private static final int VERSION_1 = 1;
-    private Logger _logger = Logger.getLogger( RestConstants.REST_LOGGER );
-
+    
     /**
      * Get User Informations
      * 
@@ -143,7 +142,7 @@ public class BannerInformationsRest
             }
             catch( URISyntaxException e )
             {
-                _logger.error( e );
+                AppLogService.error( e.getMessage( ), e );
             }
 
         }
