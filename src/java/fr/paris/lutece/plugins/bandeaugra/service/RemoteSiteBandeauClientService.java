@@ -9,61 +9,50 @@ import fr.paris.lutece.util.signrequest.HeaderHashAuthenticator;
 
 public class RemoteSiteBandeauClientService
 {
-    
-    
     private static  RemoteSiteBandeauClientService _singleton;
-    private static final String  PROPERTY_BANDEAU_MY_APPS_URL="beadeaugra.myappsWsUrl";
-    private static final String  PROPERTY_BANDEAU_MY_FAVORITES="beadeaugra.myfavoritesWsUrl";
+    private static final String  PROPERTY_BANDEAU_MY_APPS_URL = "beadeaugra.myappsWsUrl";
+    private static final String  PROPERTY_BANDEAU_MY_FAVORITES = "beadeaugra.myfavoritesWsUrl";
     
-    private static final String  PROPERTY_BANDEAU_NOTIFICATIONS_URL="beadeaugra.notificationsWsUrl";
-    private static final String  BEAN_AUTHENTICATOR="bandeaugra.requestAuthenticator";
+    private static final String  PROPERTY_BANDEAU_NOTIFICATIONS_URL = "beadeaugra.notificationsWsUrl";
+    private static final String  BEAN_AUTHENTICATOR = "bandeaugra.requestAuthenticator";
     private  String _strNotificationsUrl;
     private  String _strMyappsUrl;
     private  String _strMyFavoritesUrl;
-    private HeaderHashAuthenticator _authenticator=null;
+    private HeaderHashAuthenticator _authenticator = null;
     
-    
-    
-    
-    
-    public static RemoteSiteBandeauClientService getInstance()
+    public static RemoteSiteBandeauClientService getInstance( )
     {
-        if( _singleton == null)
+        if( _singleton == null )
        {
            
            _singleton=new RemoteSiteBandeauClientService();
            _singleton. _strNotificationsUrl=AppPropertiesService.getProperty( PROPERTY_BANDEAU_NOTIFICATIONS_URL );
            _singleton. _strMyappsUrl=AppPropertiesService.getProperty( PROPERTY_BANDEAU_MY_APPS_URL );
            _singleton. _strMyFavoritesUrl=AppPropertiesService.getProperty( PROPERTY_BANDEAU_MY_FAVORITES );
-           _singleton._authenticator= SpringContextService.getBean( BEAN_AUTHENTICATOR );
-           
-           
+           _singleton._authenticator= SpringContextService.getBean( BEAN_AUTHENTICATOR );       
        }
         return _singleton;
     }
     
-    public  String getMyApps(String strGuid)
+    public  String getMyApps( String strGuid )
     {
-        return callBannerWS(_strMyappsUrl,strGuid);
+        return callBannerWS( _strMyappsUrl,strGuid );
     }
-    public  String getNotifications(String strGuid)
+    
+    public  String getNotifications( String strGuid )
     {
-        return callBannerWS(_strNotificationsUrl,strGuid);
-        
+        return callBannerWS( _strNotificationsUrl, strGuid );
     }
+    
     public  String getMyFavorites(String strGuid)
     {
-        
-        
-       return callBannerWS(_strMyFavoritesUrl,strGuid);
-        
-        
+       return callBannerWS( _strMyFavoritesUrl,strGuid );
     }
     
     
-    private   String callBannerWS(String strWsUrl,String strGuid)
+    private   String callBannerWS( String strWsUrl, String strGuid )
     {
-         String strResponse =null;
+        String strResponse = null;
         try
         {
             HttpAccess httpAccess = new HttpAccess(  );

@@ -118,8 +118,8 @@ public class BannerInformationsRest
         {
 
             return Response.status( Response.Status.OK ).entity( BannerInformationsRest.getJsonBannerInformations( user ) )
-                    .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
-                    .header( "Access-Control-Allow-Credentials", "true" ).build( );
+                    .header( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin ).header( Constants.ACCESS_CONTROL_ALLOW_METHODS, Constants.METHODS_LIST )
+                    .header( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) ).build( );
         }
         else
         {
@@ -136,8 +136,8 @@ public class BannerInformationsRest
                 String strUrl = strBaseUrl+ "/servlet/plugins/oauth2/callback?data_client=bannerInfoDataClient";
                 URI urlRedirect = null;
                 urlRedirect = new URI( strUrl );
-                return Response.seeOther( urlRedirect ).header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
-                        .header( "Access-Control-Allow-Credentials", "true" ).build( );
+                return Response.seeOther( urlRedirect ).header( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin ).header( Constants.ACCESS_CONTROL_ALLOW_METHODS, Constants.METHODS_LIST )
+                        .header( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) ).build( );
 
             }
             catch( URISyntaxException e )
@@ -149,8 +149,8 @@ public class BannerInformationsRest
 
         return Response.status( Response.Status.UNAUTHORIZED )
                 .entity( JsonUtil.buildJsonResponse( new ErrorJsonResponse( Constants.ERROR_USER_NOT_AUTHENTICATED, Constants.ERROR_USER_NOT_AUTHENTICATED ) ) )
-                .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
-                .header( "Access-Control-Allow-Credentials", "true" ).build( );
+                .header( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin ).header( Constants.ACCESS_CONTROL_ALLOW_METHODS, Constants.METHODS_LIST )
+                .header( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) ).build( );
 
     }
     
@@ -215,8 +215,8 @@ public class BannerInformationsRest
         String strHeaderOrigin = request.getHeader( Constants.HEADER_ORIGIN );
         String strAccessControlAllowOrigin = strHeaderOrigin;
         return Response.status( Response.Status.OK ).entity( JsonUtil.buildJsonResponse( new JsonResponse( user != null )) )
-                    .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
-                    .header( "Access-Control-Allow-Credentials", "true" ).build( );
+                    .header( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin ).header( Constants.ACCESS_CONTROL_ALLOW_METHODS, Constants.METHODS_LIST )
+                    .header( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) ).build( );
        
     }
     
@@ -379,16 +379,16 @@ public class BannerInformationsRest
             if(!StringUtils.isEmpty(strBandeauSiteResponse))
             {
                 return Response.status( Response.Status.OK ).entity(strBandeauSiteResponse )
-                    .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
-                    .header( "Access-Control-Allow-Credentials", "true" ).build( );
+                    .header( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin ).header( Constants.ACCESS_CONTROL_ALLOW_METHODS, Constants.METHODS_LIST )
+                    .header( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) ).build( );
             }     
            }
     
 
         return Response.status( Response.Status.UNAUTHORIZED )
                 .entity( JsonUtil.buildJsonResponse( new ErrorJsonResponse( Constants.ERROR_USER_NOT_AUTHENTICATED, Constants.ERROR_USER_NOT_AUTHENTICATED ) ) )
-                .header( "Access-Control-Allow-Origin", strAccessControlAllowOrigin ).header( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" )
-                .header( "Access-Control-Allow-Credentials", "true" ).build( );
+                .header( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin ).header( Constants.ACCESS_CONTROL_ALLOW_METHODS, Constants.METHODS_LIST )
+                .header( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) ).build( );
 
     }
     
