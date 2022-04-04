@@ -43,18 +43,22 @@ public class BannerInformations implements Serializable
     private static final long serialVersionUID = 1L;
     private String _strFirstName;
     private String _strLastName;
+    
     public String getFirstName( )
     {
         return _strFirstName;
     }
+    
     public void setFirstName( String _strFirstName )
     {
         this._strFirstName = _strFirstName;
     }
+    
     public String getLastName( )
     {
         return _strLastName;
     }
+    
     public void setLastName( String _strLastName )
     {
         this._strLastName = _strLastName;

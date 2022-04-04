@@ -56,7 +56,8 @@ import java.net.URL;
 @Controller( xpageName = "bandeaugra", pageTitleI18nKey = "bandeaugra.xpage.bandeaugra.pageTitle", pagePathI18nKey = "bandeaugra.xpage.bandeaugra.pagePathLabel" )
 public class BandeaugraApp extends MVCApplication
 {
-    private static final String TEMPLATE_XPAGE = "/skin/plugins/bandeaugra/bandeaugra.html";
+    private static final long serialVersionUID = 2371791722341987550L;
+	private static final String TEMPLATE_XPAGE = "/skin/plugins/bandeaugra/bandeaugra.html";
     private static final String VIEW_AUTH = "auth";
     private static final String PARAMETER_BACK_URL = "back_url";
     private static final String MARK_BACK_URL = "back_url";
@@ -115,7 +116,7 @@ public class BandeaugraApp extends MVCApplication
             }
         } catch ( MalformedURLException ex) 
         {
-            AppLogService.error( "Given back_url isn't a valid url " + strBackUrl, ex);
+            AppLogService.error( "Given back_url isn't a valid url " + strBackUrl, ex );
         }
         return null;
     }

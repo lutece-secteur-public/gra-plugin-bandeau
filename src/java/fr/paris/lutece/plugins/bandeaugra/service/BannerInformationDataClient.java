@@ -69,30 +69,28 @@ public class BannerInformationDataClient extends AbstractDataClient
     /**
      * {@inheritDoc }
      */
-    @Override
     public void handleToken( Token token , HttpServletRequest  request , HttpServletResponse  response )
     {
         
-        String strHeaderOrigin=request.getHeader(Constants.HEADER_ORIGIN);
+        String strHeaderOrigin=request.getHeader( Constants.HEADER_ORIGIN );
         String strAccessControlAllowOrigin=strHeaderOrigin;
        
         try
         {
-            Map<String,Object> mapUserInfo=parse( getData( token ) );
+            Map<String,Object> mapUserInfo = parse( getData( token ) );
             Oauth2Service.getInstance().processAuthentication( request, mapUserInfo, token );
             
             LuteceUser user = SecurityService.getInstance(  ).getRegisteredUser( request );
             
             byte[] strHeadbandInformationsJson=BannerInformationsRest.getJsonBannerInformations( user ) .getBytes("UTF-8");
             
-            response.setHeader("Access-Control-Allow-Origin", strAccessControlAllowOrigin);
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setContentType("application/json");
-            response.setContentLength(strHeadbandInformationsJson.length);
-            response.getOutputStream().write( strHeadbandInformationsJson) ;
-                
-         }
+            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin );
+            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Constants.METHODS_LIST );
+            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_METHODS, Boolean.TRUE.toString( ) );
+            response.setContentType( "application/json" );
+            response.setContentLength( strHeadbandInformationsJson.length );
+            response.getOutputStream( ).write( strHeadbandInformationsJson ) ; 
+        }
         catch ( IOException ex )
         {
             AppLogService.error( "Error parsing UserInfo ", ex );
@@ -108,8 +106,8 @@ public class BannerInformationDataClient extends AbstractDataClient
     Map<String,Object> parse( String strJson ) throws IOException
     {
     	TypeReference<HashMap<String, Object>> typeRef 
-    	  = new TypeReference<HashMap<String, Object>>() {};
+    	  = new TypeReference<HashMap<String, Object>>( ) {};
     	
-    	return  _mapper.readValue(strJson, typeRef);
+    	return  _mapper.readValue( strJson, typeRef );
     }
 }

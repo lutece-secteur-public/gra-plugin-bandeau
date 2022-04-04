@@ -62,4 +62,9 @@ public final class Constants
     public static final String BANNERINFORMATIONS_PATH = "/bannerinformations";
     public static final String ERROR_USER_NOT_AUTHENTICATED = "USER_NOT_AUTHENTICATED";
     
+    public static final String ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
+    public static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
+    public static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
+    public static final String METHODS_LIST = "GET, POST, DELETE, PUT";
+    
 }
