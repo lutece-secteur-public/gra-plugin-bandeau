@@ -44,7 +44,6 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import fr.paris.lutece.plugins.bandeaugra.business.BannerInformations;
 import fr.paris.lutece.plugins.bandeaugra.rs.BannerInformationsRest;
 import fr.paris.lutece.plugins.bandeaugra.rs.Constants;
 import fr.paris.lutece.plugins.mylutece.modules.oauth2.service.Oauth2Service;
@@ -52,9 +51,7 @@ import fr.paris.lutece.plugins.oauth2.business.Token;
 import fr.paris.lutece.plugins.oauth2.dataclient.AbstractDataClient;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
-import fr.paris.lutece.util.json.JsonResponse;
-import fr.paris.lutece.util.json.JsonUtil;
-
+import fr.paris.lutece.portal.service.util.AppLogService;
 
 /**
  * UserInfoDataClient
@@ -98,7 +95,7 @@ public class BannerInformationDataClient extends AbstractDataClient
          }
         catch ( IOException ex )
         {
-            _logger.error( "Error parsing UserInfo ", ex );
+            AppLogService.error( "Error parsing UserInfo ", ex );
         }
     }
 
