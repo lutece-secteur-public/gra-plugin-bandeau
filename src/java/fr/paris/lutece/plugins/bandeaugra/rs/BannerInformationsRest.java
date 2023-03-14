@@ -50,8 +50,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.sun.jersey.api.Responses;
-
 import fr.paris.lutece.plugins.bandeaugra.business.BannerInformations;
 import fr.paris.lutece.plugins.bandeaugra.service.RemoteSiteBandeauClientService;
 import fr.paris.lutece.plugins.rest.service.RestConstants;
@@ -97,7 +95,7 @@ public class BannerInformationsRest
                 break;
         }
 
-        throw new WebApplicationException( Responses.NOT_FOUND );
+        throw new WebApplicationException( Response.Status.NOT_FOUND );
     }
 
   
@@ -197,7 +195,7 @@ public class BannerInformationsRest
                 break;
         }
 
-        throw new WebApplicationException( Responses.NOT_FOUND );
+        throw new WebApplicationException( Response.Status.NOT_FOUND  );
     }
 
     
@@ -247,7 +245,7 @@ public class BannerInformationsRest
                 break;
         }
 
-        throw new WebApplicationException( Responses.NOT_FOUND );
+        throw new WebApplicationException( Response.Status.NOT_FOUND  );
     }
 
   
@@ -290,7 +288,7 @@ public class BannerInformationsRest
                 break;
         }
 
-        throw new WebApplicationException( Responses.NOT_FOUND );
+        throw new WebApplicationException( Response.Status.NOT_FOUND  );
     }
 
   
@@ -337,7 +335,7 @@ public class BannerInformationsRest
                 break;
         }
 
-        throw new WebApplicationException( Responses.NOT_FOUND );
+        throw new WebApplicationException( Response.Status.NOT_FOUND  );
     }
 
   
