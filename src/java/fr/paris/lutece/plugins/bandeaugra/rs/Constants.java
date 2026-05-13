@@ -67,4 +67,6 @@ public final class Constants
     public static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
     public static final String METHODS_LIST = "GET, POST, DELETE, PUT";
     
+    public static final String TAG_NB_NOTIFICATIONS_UNREAD = "nb-notifications-unread";
+
 }

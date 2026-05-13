@@ -1,5 +1,9 @@
 package fr.paris.lutece.plugins.bandeaugra.service;
 
+import org.apache.commons.lang3.StringUtils;
+import org.json.simple.JSONObject;
+
+import fr.paris.lutece.plugins.bandeaugra.rs.Constants;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
@@ -41,7 +45,12 @@ public class RemoteSiteBandeauClientService
     
     public  String getNotifications( String strGuid )
     {
-        return callBannerWS( _strNotificationsUrl, strGuid );
+        String strResponse = callBannerWS( _strNotificationsUrl, strGuid );
+        
+        if(StringUtils.isEmpty(strResponse)) {
+        	strResponse=createUnreadNotificationsJson();
+        }
+        return strResponse;
     }
     
     public  String getMyFavorites(String strGuid)
@@ -71,7 +80,17 @@ public class RemoteSiteBandeauClientService
         
     }
     
-    
+    /**
+     * Creates a JSON object containing the unread notifications count set to 0.
+     * @return json
+     */
+    @SuppressWarnings("unchecked")
+	private String createUnreadNotificationsJson() {
+        JSONObject json = new JSONObject( );
+        json.put(Constants.TAG_NB_NOTIFICATIONS_UNREAD,0);
+
+        return json.toJSONString();
+    }
     
 
 }
