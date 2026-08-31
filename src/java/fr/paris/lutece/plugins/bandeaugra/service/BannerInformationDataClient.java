@@ -85,8 +85,8 @@ public class BannerInformationDataClient extends AbstractDataClient
             byte[] strHeadbandInformationsJson=BannerInformationsRest.getJsonBannerInformations( user ) .getBytes("UTF-8");
             
             response.setHeader( Constants.ACCESS_CONTROL_ALLOW_ORIGIN, strAccessControlAllowOrigin );
-            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Constants.METHODS_LIST );
-            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_METHODS, Boolean.TRUE.toString( ) );
+            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString( ) );
+            response.setHeader( Constants.ACCESS_CONTROL_ALLOW_METHODS,  Constants.METHODS_LIST );
             response.setContentType( "application/json" );
             response.setContentLength( strHeadbandInformationsJson.length );
             response.getOutputStream( ).write( strHeadbandInformationsJson ) ; 
