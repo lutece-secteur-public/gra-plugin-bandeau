@@ -1,13 +1,11 @@
 <div id="monbandeau"></div>
 <script>
-$(function() {
-    
-    <#if !is_user_authenticated>
-		loadBanner('',true);
-	<#else>
-		 loadBanner();
-	</#if>   
-});
-
+document.addEventListener( 'DOMContentLoaded', function( ) {
+<#if !is_user_authenticated>
+    loadBanner( '', true );
+<#else>
+    loadBanner( );
+</#if>
+} );
 </script>
 <script src="${url_bandeau}/assets/js/monbandeau.js"></script>

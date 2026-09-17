@@ -37,16 +37,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.function.Function;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -60,13 +60,19 @@ import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.util.json.ErrorJsonResponse;
 import fr.paris.lutece.util.json.JsonResponse;
 import fr.paris.lutece.util.json.JsonUtil;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 /**
  * BannerInformationsRest
  */
 @Path( RestConstants.BASE_PATH + Constants.PATH_BANNER_API )
+@ApplicationScoped
 public class BannerInformationsRest
 {
+    @Inject
+    private RemoteSiteBandeauClientService _remoteSiteBandeauClientService;
+
     private static final int VERSION_1 = 1;
     
     /**
@@ -258,7 +264,7 @@ public class BannerInformationsRest
     private Response getMyAppsV1( HttpServletRequest request, HttpServletResponse response )
     {
 
-        return callBandeauSite( request, response, x -> RemoteSiteBandeauClientService.getInstance( ).getMyApps( x.getName( )));
+        return callBandeauSite( request, response, x -> _remoteSiteBandeauClientService.getMyApps( x.getName( ) ));
 
     }
     
@@ -301,7 +307,7 @@ public class BannerInformationsRest
     private Response getNotificationsV1( HttpServletRequest request, HttpServletResponse response )
     {
 
-        return callBandeauSite( request, response, x -> RemoteSiteBandeauClientService.getInstance( ).getNotifications( x.getName( )));
+        return callBandeauSite( request, response, x -> _remoteSiteBandeauClientService.getNotifications( x.getName( ) ));
 
     }
     
@@ -348,7 +354,7 @@ public class BannerInformationsRest
     private Response getMyFavoritesV1( HttpServletRequest request, HttpServletResponse response )
     {
 
-        return callBandeauSite( request, response, x -> RemoteSiteBandeauClientService.getInstance( ).getMyFavorites( x.getName( )));
+        return callBandeauSite( request, response, x -> _remoteSiteBandeauClientService.getMyFavorites( x.getName( ) ));
 
     }
     

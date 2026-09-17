@@ -37,8 +37,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -59,6 +59,7 @@ import fr.paris.lutece.portal.service.util.AppLogService;
 public class BannerInformationDataClient extends AbstractDataClient
 {
     private static ObjectMapper _mapper;
+    private final Oauth2Service _oauth2Service;
 
     static
     {
@@ -69,6 +70,17 @@ public class BannerInformationDataClient extends AbstractDataClient
     /**
      * {@inheritDoc }
      */
+    /**
+     * Builds the data client on the authentication service it delegates the session to.
+     *
+     * @param oauth2Service
+     *            the oauth2 service
+     */
+    public BannerInformationDataClient( Oauth2Service oauth2Service )
+    {
+        _oauth2Service = oauth2Service;
+    }
+
     public void handleToken( Token token , HttpServletRequest  request , HttpServletResponse  response )
     {
         
@@ -78,7 +90,7 @@ public class BannerInformationDataClient extends AbstractDataClient
         try
         {
             Map<String,Object> mapUserInfo = parse( getData( token ) );
-            Oauth2Service.getInstance().processAuthentication( request, mapUserInfo, token );
+            _oauth2Service.processAuthentication( request, mapUserInfo, token );
             
             LuteceUser user = SecurityService.getInstance(  ).getRegisteredUser( request );
             
