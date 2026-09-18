@@ -1,3 +1,6 @@
+-- liquibase formatted sql
+-- changeset bandeaugra:create_db_bandeaugra.sql
+-- preconditions onFail:MARK_RAN onError:WARN
 
 --
 -- Structure for table bandeaugra_

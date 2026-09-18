@@ -36,7 +36,9 @@ package fr.paris.lutece.plugins.bandeaugra.web.includes;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 
 import fr.paris.lutece.portal.service.content.PageData;
 import fr.paris.lutece.portal.service.includes.PageInclude;
@@ -68,15 +70,16 @@ public class BandeaugraInclude implements PageInclude
 
     /**
      * {@inheritDoc}
+     *
+     * Adds nothing when the banner webapp address is not configured: without it there is no banner to include.
      */
     @Override
     public void fillTemplate( Map<String, Object> rootModel, PageData data, int nMode, HttpServletRequest request )
     {
+        String strUrlBandeau = AppPropertiesService.getProperty( PROPERTY_URL_BANDEAU );
 
-        if ( request != null )
+        if ( request != null && StringUtils.isNotBlank( strUrlBandeau ) )
         {
-
-            String strUrlBandeau = AppPropertiesService.getProperty( PROPERTY_URL_BANDEAU );
             HashMap<String, Object> mapInclude = new HashMap<>( );
 
             LuteceUser user = null;

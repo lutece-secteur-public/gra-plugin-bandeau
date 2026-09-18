@@ -33,9 +33,7 @@
  */
 package fr.paris.lutece.plugins.bandeaugra.web;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
@@ -47,12 +45,18 @@ import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
 import fr.paris.lutece.portal.web.constants.Markers;
+import fr.paris.lutece.portal.web.cdi.mvc.Models;
 import fr.paris.lutece.portal.web.xpages.XPage;
+
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import java.net.MalformedURLException;
 import java.net.URL;
 /**
  * This class provides a simple implementation of an XPage
  */
+@RequestScoped
+@Named( "bandeaugra.xpage.bandeaugra" )
 @Controller( xpageName = "bandeaugra", pageTitleI18nKey = "bandeaugra.xpage.bandeaugra.pageTitle", pagePathI18nKey = "bandeaugra.xpage.bandeaugra.pagePathLabel" )
 public class BandeaugraApp extends MVCApplication
 {
@@ -72,7 +76,7 @@ public class BandeaugraApp extends MVCApplication
      * @return The view
      */
     @View( value = VIEW_AUTH, defaultView = true )
-    public XPage viewAuth( HttpServletRequest request ) throws UserNotSignedException
+    public XPage viewAuth( HttpServletRequest request, Models model ) throws UserNotSignedException
     {
 
         LuteceUser luteceUser = SecurityService.getInstance( ).getRegisteredUser( request );
@@ -84,7 +88,6 @@ public class BandeaugraApp extends MVCApplication
 
         String strBackUrl = getBackUrl( request );
 
-        Map<String, Object> model = getModel( );
         model.put( Markers.BASE_URL, AppPathService.getBaseUrl( request ) );
         
         if ( strBackUrl != null )
@@ -116,7 +119,7 @@ public class BandeaugraApp extends MVCApplication
             }
         } catch ( MalformedURLException ex) 
         {
-            AppLogService.error( "Given back_url isn't a valid url " + strBackUrl, ex );
+            AppLogService.error( "Given back_url isn't a valid url {}", strBackUrl, ex );
         }
         return null;
     }
