@@ -35,6 +35,9 @@ package fr.paris.lutece.plugins.bandeaugra.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
+
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.service.security.UserNotSignedException;
@@ -73,7 +76,11 @@ public class BandeaugraApp extends MVCApplication
      * 
      * @param request
      *            The HTTP request
+     * @param model
+     *            The model of the view
      * @return The view
+     * @throws UserNotSignedException
+     *             if no user is signed in
      */
     @View( value = VIEW_AUTH, defaultView = true )
     public XPage viewAuth( HttpServletRequest request, Models model ) throws UserNotSignedException
@@ -101,9 +108,23 @@ public class BandeaugraApp extends MVCApplication
 
     }
 
+    /**
+     * Returns the back url given in the request when its host belongs to an authorized domain. The value is read back
+     * from the HTML entities the core request sanitizer puts in the parameters.
+     *
+     * @param request
+     *            The HTTP request
+     * @return the back url, or null when it is missing, invalid or outside the authorized domains
+     */
     private static String getBackUrl( HttpServletRequest request )
     {
-        String strBackUrl = request.getParameter( PARAMETER_BACK_URL );
+        String strBackUrl = StringEscapeUtils.unescapeHtml4( request.getParameter( PARAMETER_BACK_URL ) );
+
+        if ( StringUtils.isBlank( strBackUrl ) )
+        {
+            return null;
+        }
+
         String[] listAuthorizedDomains = AppPropertiesService.getProperty( PROPERTY_AUTHORIZED_DOMAINS ).split( CONSTANT_COMMA );
 
         try 
