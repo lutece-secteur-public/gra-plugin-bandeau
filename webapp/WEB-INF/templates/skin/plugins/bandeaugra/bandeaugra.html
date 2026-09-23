@@ -17,13 +17,16 @@
 <body>
 
 <script>
-
+  if ( window.opener ) {
   <#if back_url??>
-    window.opener.location.href='${back_url?js_string}'
+    window.opener.location.href='${back_url?js_string}';
   <#else>
     window.opener.location.href = window.opener.location.href;
   </#if>
-  window.close();
+    window.close();
+  } else {
+    window.location.replace( '<#if back_url??>${back_url?js_string}<#else>${base_url?js_string}</#if>' );
+  }
 </script>
 
 </body>
